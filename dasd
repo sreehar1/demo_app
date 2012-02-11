@@ -1,0 +1,2300 @@
+commit 1dc3559d5063174767bd01e25d8ccf69de6d54ac
+Author: sreehar1 <kasagundi@gmail.com>
+Date:   Fri Feb 10 21:44:55 2012 -0500
+
+    Initial commit
+
+diff --git a/.gitignore b/.gitignore
+new file mode 100644
+index 0000000..f0fa30c
+--- /dev/null
++++ b/.gitignore
+@@ -0,0 +1,4 @@
++.bundle
++db/*.sqlite3
++log/*.log
++tmp/
+diff --git a/Gemfile b/Gemfile
+new file mode 100644
+index 0000000..7b0427d
+--- /dev/null
++++ b/Gemfile
+@@ -0,0 +1,31 @@
++source 'http://rubygems.org'
++
++gem 'rails', '3.0.11'
++
++# Bundle edge Rails instead:
++# gem 'rails', :git => 'git://github.com/rails/rails.git'
++
++gem 'sqlite3', '1.3.3'
++
++# Use unicorn as the web server
++# gem 'unicorn'
++
++# Deploy with Capistrano
++# gem 'capistrano'
++
++# To use debugger (ruby-debug for Ruby 1.8.7+, ruby-debug19 for Ruby 1.9.2+)
++# gem 'ruby-debug'
++# gem 'ruby-debug19', :require => 'ruby-debug'
++
++# Bundle the extra gems:
++# gem 'bj'
++# gem 'nokogiri'
++# gem 'sqlite3-ruby', :require => 'sqlite3'
++# gem 'aws-s3', :require => 'aws/s3'
++
++# Bundle gems for the local environment. Make sure to
++# put test-only gems in this group so their generators
++# and rake tasks are available in development mode:
++# group :development, :test do
++#   gem 'webrat'
++# end
+diff --git a/Gemfile.lock b/Gemfile.lock
+new file mode 100644
+index 0000000..112f8ce
+--- /dev/null
++++ b/Gemfile.lock
+@@ -0,0 +1,78 @@
++GEM
++  remote: http://rubygems.org/
++  specs:
++    abstract (1.0.0)
++    actionmailer (3.0.11)
++      actionpack (= 3.0.11)
++      mail (~> 2.2.19)
++    actionpack (3.0.11)
++      activemodel (= 3.0.11)
++      activesupport (= 3.0.11)
++      builder (~> 2.1.2)
++      erubis (~> 2.6.6)
++      i18n (~> 0.5.0)
++      rack (~> 1.2.1)
++      rack-mount (~> 0.6.14)
++      rack-test (~> 0.5.7)
++      tzinfo (~> 0.3.23)
++    activemodel (3.0.11)
++      activesupport (= 3.0.11)
++      builder (~> 2.1.2)
++      i18n (~> 0.5.0)
++    activerecord (3.0.11)
++      activemodel (= 3.0.11)
++      activesupport (= 3.0.11)
++      arel (~> 2.0.10)
++      tzinfo (~> 0.3.23)
++    activeresource (3.0.11)
++      activemodel (= 3.0.11)
++      activesupport (= 3.0.11)
++    activesupport (3.0.11)
++    arel (2.0.10)
++    builder (2.1.2)
++    erubis (2.6.6)
++      abstract (>= 1.0.0)
++    i18n (0.5.0)
++    json (1.6.5)
++    mail (2.2.19)
++      activesupport (>= 2.3.6)
++      i18n (>= 0.4.0)
++      mime-types (~> 1.16)
++      treetop (~> 1.4.8)
++    mime-types (1.17.2)
++    polyglot (0.3.3)
++    rack (1.2.5)
++    rack-mount (0.6.14)
++      rack (>= 1.0.0)
++    rack-test (0.5.7)
++      rack (>= 1.0)
++    rails (3.0.11)
++      actionmailer (= 3.0.11)
++      actionpack (= 3.0.11)
++      activerecord (= 3.0.11)
++      activeresource (= 3.0.11)
++      activesupport (= 3.0.11)
++      bundler (~> 1.0)
++      railties (= 3.0.11)
++    railties (3.0.11)
++      actionpack (= 3.0.11)
++      activesupport (= 3.0.11)
++      rake (>= 0.8.7)
++      rdoc (~> 3.4)
++      thor (~> 0.14.4)
++    rake (0.9.2.2)
++    rdoc (3.12)
++      json (~> 1.4)
++    sqlite3 (1.3.3)
++    thor (0.14.6)
++    treetop (1.4.10)
++      polyglot
++      polyglot (>= 0.3.1)
++    tzinfo (0.3.31)
++
++PLATFORMS
++  ruby
++
++DEPENDENCIES
++  rails (= 3.0.11)
++  sqlite3 (= 1.3.3)
+diff --git a/Gemfile~ b/Gemfile~
+new file mode 100644
+index 0000000..c0b69f9
+--- /dev/null
++++ b/Gemfile~
+@@ -0,0 +1,31 @@
++source 'http://rubygems.org'
++
++gem 'rails', '3.0.11'
++
++# Bundle edge Rails instead:
++# gem 'rails', :git => 'git://github.com/rails/rails.git'
++
++gem 'sqlite03', '1.3.3'
++
++# Use unicorn as the web server
++# gem 'unicorn'
++
++# Deploy with Capistrano
++# gem 'capistrano'
++
++# To use debugger (ruby-debug for Ruby 1.8.7+, ruby-debug19 for Ruby 1.9.2+)
++# gem 'ruby-debug'
++# gem 'ruby-debug19', :require => 'ruby-debug'
++
++# Bundle the extra gems:
++# gem 'bj'
++# gem 'nokogiri'
++# gem 'sqlite3-ruby', :require => 'sqlite3'
++# gem 'aws-s3', :require => 'aws/s3'
++
++# Bundle gems for the local environment. Make sure to
++# put test-only gems in this group so their generators
++# and rake tasks are available in development mode:
++# group :development, :test do
++#   gem 'webrat'
++# end
+diff --git a/README b/README
+new file mode 100644
+index 0000000..fe7013d
+--- /dev/null
++++ b/README
+@@ -0,0 +1,256 @@
++== Welcome to Rails
++
++Rails is a web-application framework that includes everything needed to create
++database-backed web applications according to the Model-View-Control pattern.
++
++This pattern splits the view (also called the presentation) into "dumb"
++templates that are primarily responsible for inserting pre-built data in between
++HTML tags. The model contains the "smart" domain objects (such as Account,
++Product, Person, Post) that holds all the business logic and knows how to
++persist themselves to a database. The controller handles the incoming requests
++(such as Save New Account, Update Product, Show Post) by manipulating the model
++and directing data to the view.
++
++In Rails, the model is handled by what's called an object-relational mapping
++layer entitled Active Record. This layer allows you to present the data from
++database rows as objects and embellish these data objects with business logic
++methods. You can read more about Active Record in
++link:files/vendor/rails/activerecord/README.html.
++
++The controller and view are handled by the Action Pack, which handles both
++layers by its two parts: Action View and Action Controller. These two layers
++are bundled in a single package due to their heavy interdependence. This is
++unlike the relationship between the Active Record and Action Pack that is much
++more separate. Each of these packages can be used independently outside of
++Rails. You can read more about Action Pack in
++link:files/vendor/rails/actionpack/README.html.
++
++
++== Getting Started
++
++1. At the command prompt, create a new Rails application:
++       <tt>rails new myapp</tt> (where <tt>myapp</tt> is the application name)
++
++2. Change directory to <tt>myapp</tt> and start the web server:
++       <tt>cd myapp; rails server</tt> (run with --help for options)
++
++3. Go to http://localhost:3000/ and you'll see:
++       "Welcome aboard: You're riding Ruby on Rails!"
++
++4. Follow the guidelines to start developing your application. You can find
++the following resources handy:
++
++* The Getting Started Guide: http://guides.rubyonrails.org/getting_started.html
++* Ruby on Rails Tutorial Book: http://www.railstutorial.org/
++
++
++== Debugging Rails
++
++Sometimes your application goes wrong. Fortunately there are a lot of tools that
++will help you debug it and get it back on the rails.
++
++First area to check is the application log files. Have "tail -f" commands
++running on the server.log and development.log. Rails will automatically display
++debugging and runtime information to these files. Debugging info will also be
++shown in the browser on requests from 127.0.0.1.
++
++You can also log your own messages directly into the log file from your code
++using the Ruby logger class from inside your controllers. Example:
++
++  class WeblogController < ActionController::Base
++    def destroy
++      @weblog = Weblog.find(params[:id])
++      @weblog.destroy
++      logger.info("#{Time.now} Destroyed Weblog ID ##{@weblog.id}!")
++    end
++  end
++
++The result will be a message in your log file along the lines of:
++
++  Mon Oct 08 14:22:29 +1000 2007 Destroyed Weblog ID #1!
++
++More information on how to use the logger is at http://www.ruby-doc.org/core/
++
++Also, Ruby documentation can be found at http://www.ruby-lang.org/. There are
++several books available online as well:
++
++* Programming Ruby: http://www.ruby-doc.org/docs/ProgrammingRuby/ (Pickaxe)
++* Learn to Program: http://pine.fm/LearnToProgram/ (a beginners guide)
++
++These two books will bring you up to speed on the Ruby language and also on
++programming in general.
++
++
++== Debugger
++
++Debugger support is available through the debugger command when you start your
++Mongrel or WEBrick server with --debugger. This means that you can break out of
++execution at any point in the code, investigate and change the model, and then,
++resume execution! You need to install ruby-debug to run the server in debugging
++mode. With gems, use <tt>sudo gem install ruby-debug</tt>. Example:
++
++  class WeblogController < ActionController::Base
++    def index
++      @posts = Post.find(:all)
++      debugger
++    end
++  end
++
++So the controller will accept the action, run the first line, then present you
++with a IRB prompt in the server window. Here you can do things like:
++
++  >> @posts.inspect
++  => "[#<Post:0x14a6be8
++          @attributes={"title"=>nil, "body"=>nil, "id"=>"1"}>,
++       #<Post:0x14a6620
++          @attributes={"title"=>"Rails", "body"=>"Only ten..", "id"=>"2"}>]"
++  >> @posts.first.title = "hello from a debugger"
++  => "hello from a debugger"
++
++...and even better, you can examine how your runtime objects actually work:
++
++  >> f = @posts.first
++  => #<Post:0x13630c4 @attributes={"title"=>nil, "body"=>nil, "id"=>"1"}>
++  >> f.
++  Display all 152 possibilities? (y or n)
++
++Finally, when you're ready to resume execution, you can enter "cont".
++
++
++== Console
++
++The console is a Ruby shell, which allows you to interact with your
++application's domain model. Here you'll have all parts of the application
++configured, just like it is when the application is running. You can inspect
++domain models, change values, and save to the database. Starting the script
++without arguments will launch it in the development environment.
++
++To start the console, run <tt>rails console</tt> from the application
++directory.
++
++Options:
++
++* Passing the <tt>-s, --sandbox</tt> argument will rollback any modifications
++  made to the database.
++* Passing an environment name as an argument will load the corresponding
++  environment. Example: <tt>rails console production</tt>.
++
++To reload your controllers and models after launching the console run
++<tt>reload!</tt>
++
++More information about irb can be found at:
++link:http://www.rubycentral.com/pickaxe/irb.html
++
++
++== dbconsole
++
++You can go to the command line of your database directly through <tt>rails
++dbconsole</tt>. You would be connected to the database with the credentials
++defined in database.yml. Starting the script without arguments will connect you
++to the development database. Passing an argument will connect you to a different
++database, like <tt>rails dbconsole production</tt>. Currently works for MySQL,
++PostgreSQL and SQLite 3.
++
++== Description of Contents
++
++The default directory structure of a generated Ruby on Rails application:
++
++  |-- app
++  |   |-- controllers
++  |   |-- helpers
++  |   |-- mailers
++  |   |-- models
++  |   `-- views
++  |       `-- layouts
++  |-- config
++  |   |-- environments
++  |   |-- initializers
++  |   `-- locales
++  |-- db
++  |-- doc
++  |-- lib
++  |   `-- tasks
++  |-- log
++  |-- public
++  |   |-- images
++  |   |-- javascripts
++  |   `-- stylesheets
++  |-- script
++  |-- test
++  |   |-- fixtures
++  |   |-- functional
++  |   |-- integration
++  |   |-- performance
++  |   `-- unit
++  |-- tmp
++  |   |-- cache
++  |   |-- pids
++  |   |-- sessions
++  |   `-- sockets
++  `-- vendor
++      `-- plugins
++
++app
++  Holds all the code that's specific to this particular application.
++
++app/controllers
++  Holds controllers that should be named like weblogs_controller.rb for
++  automated URL mapping. All controllers should descend from
++  ApplicationController which itself descends from ActionController::Base.
++
++app/models
++  Holds models that should be named like post.rb. Models descend from
++  ActiveRecord::Base by default.
++
++app/views
++  Holds the template files for the view that should be named like
++  weblogs/index.html.erb for the WeblogsController#index action. All views use
++  eRuby syntax by default.
++
++app/views/layouts
++  Holds the template files for layouts to be used with views. This models the
++  common header/footer method of wrapping views. In your views, define a layout
++  using the <tt>layout :default</tt> and create a file named default.html.erb.
++  Inside default.html.erb, call <% yield %> to render the view using this
++  layout.
++
++app/helpers
++  Holds view helpers that should be named like weblogs_helper.rb. These are
++  generated for you automatically when using generators for controllers.
++  Helpers can be used to wrap functionality for your views into methods.
++
++config
++  Configuration files for the Rails environment, the routing map, the database,
++  and other dependencies.
++
++db
++  Contains the database schema in schema.rb. db/migrate contains all the
++  sequence of Migrations for your schema.
++
++doc
++  This directory is where your application documentation will be stored when
++  generated using <tt>rake doc:app</tt>
++
++lib
++  Application specific libraries. Basically, any kind of custom code that
++  doesn't belong under controllers, models, or helpers. This directory is in
++  the load path.
++
++public
++  The directory available for the web server. Contains subdirectories for
++  images, stylesheets, and javascripts. Also contains the dispatchers and the
++  default HTML files. This should be set as the DOCUMENT_ROOT of your web
++  server.
++
++script
++  Helper scripts for automation and generation.
++
++test
++  Unit and functional tests along with fixtures. When using the rails generate
++  command, template test files will be generated for you and placed in this
++  directory.
++
++vendor
++  External libraries that the application depends on. Also includes the plugins
++  subdirectory. If the app has frozen rails, those gems also go here, under
++  vendor/rails/. This directory is in the load path.
+diff --git a/Rakefile b/Rakefile
+new file mode 100644
+index 0000000..10fca21
+--- /dev/null
++++ b/Rakefile
+@@ -0,0 +1,7 @@
++# Add your own tasks in files placed in lib/tasks ending in .rake,
++# for example lib/tasks/capistrano.rake, and they will automatically be available to Rake.
++
++require File.expand_path('../config/application', __FILE__)
++require 'rake'
++
++DemoApp::Application.load_tasks
+diff --git a/app/controllers/application_controller.rb b/app/controllers/application_controller.rb
+new file mode 100644
+index 0000000..e8065d9
+--- /dev/null
++++ b/app/controllers/application_controller.rb
+@@ -0,0 +1,3 @@
++class ApplicationController < ActionController::Base
++  protect_from_forgery
++end
+diff --git a/app/helpers/application_helper.rb b/app/helpers/application_helper.rb
+new file mode 100644
+index 0000000..de6be79
+--- /dev/null
++++ b/app/helpers/application_helper.rb
+@@ -0,0 +1,2 @@
++module ApplicationHelper
++end
+diff --git a/app/views/layouts/application.html.erb b/app/views/layouts/application.html.erb
+new file mode 100644
+index 0000000..59319d2
+--- /dev/null
++++ b/app/views/layouts/application.html.erb
+@@ -0,0 +1,14 @@
++<!DOCTYPE html>
++<html>
++<head>
++  <title>DemoApp</title>
++  <%= stylesheet_link_tag :all %>
++  <%= javascript_include_tag :defaults %>
++  <%= csrf_meta_tag %>
++</head>
++<body>
++
++<%= yield %>
++
++</body>
++</html>
+diff --git a/config.ru b/config.ru
+new file mode 100644
+index 0000000..a2e639f
+--- /dev/null
++++ b/config.ru
+@@ -0,0 +1,4 @@
++# This file is used by Rack-based servers to start the application.
++
++require ::File.expand_path('../config/environment',  __FILE__)
++run DemoApp::Application
+diff --git a/config/application.rb b/config/application.rb
+new file mode 100644
+index 0000000..a11d8e2
+--- /dev/null
++++ b/config/application.rb
+@@ -0,0 +1,42 @@
++require File.expand_path('../boot', __FILE__)
++
++require 'rails/all'
++
++# If you have a Gemfile, require the gems listed there, including any gems
++# you've limited to :test, :development, or :production.
++Bundler.require(:default, Rails.env) if defined?(Bundler)
++
++module DemoApp
++  class Application < Rails::Application
++    # Settings in config/environments/* take precedence over those specified here.
++    # Application configuration should go into files in config/initializers
++    # -- all .rb files in that directory are automatically loaded.
++
++    # Custom directories with classes and modules you want to be autoloadable.
++    # config.autoload_paths += %W(#{config.root}/extras)
++
++    # Only load the plugins named here, in the order given (default is alphabetical).
++    # :all can be used as a placeholder for all plugins not explicitly named.
++    # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
++
++    # Activate observers that should always be running.
++    # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
++
++    # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
++    # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
++    # config.time_zone = 'Central Time (US & Canada)'
++
++    # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
++    # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
++    # config.i18n.default_locale = :de
++
++    # JavaScript files you want as :defaults (application.js is always included).
++    # config.action_view.javascript_expansions[:defaults] = %w(jquery rails)
++
++    # Configure the default encoding used in templates for Ruby 1.9.
++    config.encoding = "utf-8"
++
++    # Configure sensitive parameters which will be filtered from the log file.
++    config.filter_parameters += [:password]
++  end
++end
+diff --git a/config/boot.rb b/config/boot.rb
+new file mode 100644
+index 0000000..4489e58
+--- /dev/null
++++ b/config/boot.rb
+@@ -0,0 +1,6 @@
++require 'rubygems'
++
++# Set up gems listed in the Gemfile.
++ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../../Gemfile', __FILE__)
++
++require 'bundler/setup' if File.exists?(ENV['BUNDLE_GEMFILE'])
+diff --git a/config/database.yml b/config/database.yml
+new file mode 100644
+index 0000000..90d87cc
+--- /dev/null
++++ b/config/database.yml
+@@ -0,0 +1,22 @@
++# SQLite version 3.x
++#   gem install sqlite3
++development:
++  adapter: sqlite3
++  database: db/development.sqlite3
++  pool: 5
++  timeout: 5000
++
++# Warning: The database defined as "test" will be erased and
++# re-generated from your development database when you run "rake".
++# Do not set this db to the same as development or production.
++test:
++  adapter: sqlite3
++  database: db/test.sqlite3
++  pool: 5
++  timeout: 5000
++
++production:
++  adapter: sqlite3
++  database: db/production.sqlite3
++  pool: 5
++  timeout: 5000
+diff --git a/config/environment.rb b/config/environment.rb
+new file mode 100644
+index 0000000..bc0ee39
+--- /dev/null
++++ b/config/environment.rb
+@@ -0,0 +1,5 @@
++# Load the rails application
++require File.expand_path('../application', __FILE__)
++
++# Initialize the rails application
++DemoApp::Application.initialize!
+diff --git a/config/environments/development.rb b/config/environments/development.rb
+new file mode 100644
+index 0000000..5eba8b8
+--- /dev/null
++++ b/config/environments/development.rb
+@@ -0,0 +1,26 @@
++DemoApp::Application.configure do
++  # Settings specified here will take precedence over those in config/application.rb
++
++  # In the development environment your application's code is reloaded on
++  # every request.  This slows down response time but is perfect for development
++  # since you don't have to restart the webserver when you make code changes.
++  config.cache_classes = false
++
++  # Log error messages when you accidentally call methods on nil.
++  config.whiny_nils = true
++
++  # Show full error reports and disable caching
++  config.consider_all_requests_local       = true
++  config.action_view.debug_rjs             = true
++  config.action_controller.perform_caching = false
++
++  # Don't care if the mailer can't send
++  config.action_mailer.raise_delivery_errors = false
++
++  # Print deprecation notices to the Rails logger
++  config.active_support.deprecation = :log
++
++  # Only use best-standards-support built into browsers
++  config.action_dispatch.best_standards_support = :builtin
++end
++
+diff --git a/config/environments/production.rb b/config/environments/production.rb
+new file mode 100644
+index 0000000..825c485
+--- /dev/null
++++ b/config/environments/production.rb
+@@ -0,0 +1,49 @@
++DemoApp::Application.configure do
++  # Settings specified here will take precedence over those in config/application.rb
++
++  # The production environment is meant for finished, "live" apps.
++  # Code is not reloaded between requests
++  config.cache_classes = true
++
++  # Full error reports are disabled and caching is turned on
++  config.consider_all_requests_local       = false
++  config.action_controller.perform_caching = true
++
++  # Specifies the header that your server uses for sending files
++  config.action_dispatch.x_sendfile_header = "X-Sendfile"
++
++  # For nginx:
++  # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect'
++
++  # If you have no front-end server that supports something like X-Sendfile,
++  # just comment this out and Rails will serve the files
++
++  # See everything in the log (default is :info)
++  # config.log_level = :debug
++
++  # Use a different logger for distributed setups
++  # config.logger = SyslogLogger.new
++
++  # Use a different cache store in production
++  # config.cache_store = :mem_cache_store
++
++  # Disable Rails's static asset server
++  # In production, Apache or nginx will already do this
++  config.serve_static_assets = false
++
++  # Enable serving of images, stylesheets, and javascripts from an asset server
++  # config.action_controller.asset_host = "http://assets.example.com"
++
++  # Disable delivery errors, bad email addresses will be ignored
++  # config.action_mailer.raise_delivery_errors = false
++
++  # Enable threaded mode
++  # config.threadsafe!
++
++  # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
++  # the I18n.default_locale when a translation can not be found)
++  config.i18n.fallbacks = true
++
++  # Send deprecation notices to registered listeners
++  config.active_support.deprecation = :notify
++end
+diff --git a/config/environments/test.rb b/config/environments/test.rb
+new file mode 100644
+index 0000000..4c77118
+--- /dev/null
++++ b/config/environments/test.rb
+@@ -0,0 +1,35 @@
++DemoApp::Application.configure do
++  # Settings specified here will take precedence over those in config/application.rb
++
++  # The test environment is used exclusively to run your application's
++  # test suite.  You never need to work with it otherwise.  Remember that
++  # your test database is "scratch space" for the test suite and is wiped
++  # and recreated between test runs.  Don't rely on the data there!
++  config.cache_classes = true
++
++  # Log error messages when you accidentally call methods on nil.
++  config.whiny_nils = true
++
++  # Show full error reports and disable caching
++  config.consider_all_requests_local       = true
++  config.action_controller.perform_caching = false
++
++  # Raise exceptions instead of rendering exception templates
++  config.action_dispatch.show_exceptions = false
++
++  # Disable request forgery protection in test environment
++  config.action_controller.allow_forgery_protection    = false
++
++  # Tell Action Mailer not to deliver emails to the real world.
++  # The :test delivery method accumulates sent emails in the
++  # ActionMailer::Base.deliveries array.
++  config.action_mailer.delivery_method = :test
++
++  # Use SQL instead of Active Record's schema dumper when creating the test database.
++  # This is necessary if your schema can't be completely dumped by the schema dumper,
++  # like if you have constraints or database-specific column types
++  # config.active_record.schema_format = :sql
++
++  # Print deprecation notices to the stderr
++  config.active_support.deprecation = :stderr
++end
+diff --git a/config/initializers/backtrace_silencers.rb b/config/initializers/backtrace_silencers.rb
+new file mode 100644
+index 0000000..59385cd
+--- /dev/null
++++ b/config/initializers/backtrace_silencers.rb
+@@ -0,0 +1,7 @@
++# Be sure to restart your server when you modify this file.
++
++# You can add backtrace silencers for libraries that you're using but don't wish to see in your backtraces.
++# Rails.backtrace_cleaner.add_silencer { |line| line =~ /my_noisy_library/ }
++
++# You can also remove all the silencers if you're trying to debug a problem that might stem from framework code.
++# Rails.backtrace_cleaner.remove_silencers!
+diff --git a/config/initializers/inflections.rb b/config/initializers/inflections.rb
+new file mode 100644
+index 0000000..9e8b013
+--- /dev/null
++++ b/config/initializers/inflections.rb
+@@ -0,0 +1,10 @@
++# Be sure to restart your server when you modify this file.
++
++# Add new inflection rules using the following format
++# (all these examples are active by default):
++# ActiveSupport::Inflector.inflections do |inflect|
++#   inflect.plural /^(ox)$/i, '\1en'
++#   inflect.singular /^(ox)en/i, '\1'
++#   inflect.irregular 'person', 'people'
++#   inflect.uncountable %w( fish sheep )
++# end
+diff --git a/config/initializers/mime_types.rb b/config/initializers/mime_types.rb
+new file mode 100644
+index 0000000..72aca7e
+--- /dev/null
++++ b/config/initializers/mime_types.rb
+@@ -0,0 +1,5 @@
++# Be sure to restart your server when you modify this file.
++
++# Add new mime types for use in respond_to blocks:
++# Mime::Type.register "text/richtext", :rtf
++# Mime::Type.register_alias "text/html", :iphone
+diff --git a/config/initializers/secret_token.rb b/config/initializers/secret_token.rb
+new file mode 100644
+index 0000000..b1d020d
+--- /dev/null
++++ b/config/initializers/secret_token.rb
+@@ -0,0 +1,7 @@
++# Be sure to restart your server when you modify this file.
++
++# Your secret key for verifying the integrity of signed cookies.
++# If you change this key, all old signed cookies will become invalid!
++# Make sure the secret is at least 30 characters and all random,
++# no regular words or you'll be exposed to dictionary attacks.
++DemoApp::Application.config.secret_token = 'be6ff78fae0b3e365d4162eb258bc4211523674da1eeb1733ad3a9e18be68c372b9eac13858a317632d9f8bf1515d5c1d684ee73cc5d11e5949201d179433c05'
+diff --git a/config/initializers/session_store.rb b/config/initializers/session_store.rb
+new file mode 100644
+index 0000000..00738f8
+--- /dev/null
++++ b/config/initializers/session_store.rb
+@@ -0,0 +1,8 @@
++# Be sure to restart your server when you modify this file.
++
++DemoApp::Application.config.session_store :cookie_store, :key => '_demo_app_session'
++
++# Use the database for sessions instead of the cookie-based default,
++# which shouldn't be used to store highly confidential information
++# (create the session table with "rails generate session_migration")
++# DemoApp::Application.config.session_store :active_record_store
+diff --git a/config/locales/en.yml b/config/locales/en.yml
+new file mode 100644
+index 0000000..a747bfa
+--- /dev/null
++++ b/config/locales/en.yml
+@@ -0,0 +1,5 @@
++# Sample localization file for English. Add more files in this directory for other locales.
++# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
++
++en:
++  hello: "Hello world"
+diff --git a/config/routes.rb b/config/routes.rb
+new file mode 100644
+index 0000000..1ef1699
+--- /dev/null
++++ b/config/routes.rb
+@@ -0,0 +1,58 @@
++DemoApp::Application.routes.draw do
++  # The priority is based upon order of creation:
++  # first created -> highest priority.
++
++  # Sample of regular route:
++  #   match 'products/:id' => 'catalog#view'
++  # Keep in mind you can assign values other than :controller and :action
++
++  # Sample of named route:
++  #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
++  # This route can be invoked with purchase_url(:id => product.id)
++
++  # Sample resource route (maps HTTP verbs to controller actions automatically):
++  #   resources :products
++
++  # Sample resource route with options:
++  #   resources :products do
++  #     member do
++  #       get 'short'
++  #       post 'toggle'
++  #     end
++  #
++  #     collection do
++  #       get 'sold'
++  #     end
++  #   end
++
++  # Sample resource route with sub-resources:
++  #   resources :products do
++  #     resources :comments, :sales
++  #     resource :seller
++  #   end
++
++  # Sample resource route with more complex sub-resources
++  #   resources :products do
++  #     resources :comments
++  #     resources :sales do
++  #       get 'recent', :on => :collection
++  #     end
++  #   end
++
++  # Sample resource route within a namespace:
++  #   namespace :admin do
++  #     # Directs /admin/products/* to Admin::ProductsController
++  #     # (app/controllers/admin/products_controller.rb)
++  #     resources :products
++  #   end
++
++  # You can have the root of your site routed with "root"
++  # just remember to delete public/index.html.
++  # root :to => "welcome#index"
++
++  # See how all your routes lay out with "rake routes"
++
++  # This is a legacy wild controller route that's not recommended for RESTful applications.
++  # Note: This route will make all actions in every controller accessible via GET requests.
++  # match ':controller(/:action(/:id(.:format)))'
++end
+diff --git a/db/seeds.rb b/db/seeds.rb
+new file mode 100644
+index 0000000..664d8c7
+--- /dev/null
++++ b/db/seeds.rb
+@@ -0,0 +1,7 @@
++# This file should contain all the record creation needed to seed the database with its default values.
++# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
++#
++# Examples:
++#
++#   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
++#   Mayor.create(:name => 'Daley', :city => cities.first)
+diff --git a/doc/README_FOR_APP b/doc/README_FOR_APP
+new file mode 100644
+index 0000000..fe41f5c
+--- /dev/null
++++ b/doc/README_FOR_APP
+@@ -0,0 +1,2 @@
++Use this README file to introduce your application and point to useful places in the API for learning more.
++Run "rake doc:app" to generate API documentation for your models, controllers, helpers, and libraries.
+diff --git a/lib/tasks/.gitkeep b/lib/tasks/.gitkeep
+new file mode 100644
+index 0000000..e69de29
+diff --git a/public/404.html b/public/404.html
+new file mode 100644
+index 0000000..9a48320
+--- /dev/null
++++ b/public/404.html
+@@ -0,0 +1,26 @@
++<!DOCTYPE html>
++<html>
++<head>
++  <title>The page you were looking for doesn't exist (404)</title>
++  <style type="text/css">
++    body { background-color: #fff; color: #666; text-align: center; font-family: arial, sans-serif; }
++    div.dialog {
++      width: 25em;
++      padding: 0 4em;
++      margin: 4em auto 0 auto;
++      border: 1px solid #ccc;
++      border-right-color: #999;
++      border-bottom-color: #999;
++    }
++    h1 { font-size: 100%; color: #f00; line-height: 1.5em; }
++  </style>
++</head>
++
++<body>
++  <!-- This file lives in public/404.html -->
++  <div class="dialog">
++    <h1>The page you were looking for doesn't exist.</h1>
++    <p>You may have mistyped the address or the page may have moved.</p>
++  </div>
++</body>
++</html>
+diff --git a/public/422.html b/public/422.html
+new file mode 100644
+index 0000000..83660ab
+--- /dev/null
++++ b/public/422.html
+@@ -0,0 +1,26 @@
++<!DOCTYPE html>
++<html>
++<head>
++  <title>The change you wanted was rejected (422)</title>
++  <style type="text/css">
++    body { background-color: #fff; color: #666; text-align: center; font-family: arial, sans-serif; }
++    div.dialog {
++      width: 25em;
++      padding: 0 4em;
++      margin: 4em auto 0 auto;
++      border: 1px solid #ccc;
++      border-right-color: #999;
++      border-bottom-color: #999;
++    }
++    h1 { font-size: 100%; color: #f00; line-height: 1.5em; }
++  </style>
++</head>
++
++<body>
++  <!-- This file lives in public/422.html -->
++  <div class="dialog">
++    <h1>The change you wanted was rejected.</h1>
++    <p>Maybe you tried to change something you didn't have access to.</p>
++  </div>
++</body>
++</html>
+diff --git a/public/500.html b/public/500.html
+new file mode 100644
+index 0000000..b80307f
+--- /dev/null
++++ b/public/500.html
+@@ -0,0 +1,26 @@
++<!DOCTYPE html>
++<html>
++<head>
++  <title>We're sorry, but something went wrong (500)</title>
++  <style type="text/css">
++    body { background-color: #fff; color: #666; text-align: center; font-family: arial, sans-serif; }
++    div.dialog {
++      width: 25em;
++      padding: 0 4em;
++      margin: 4em auto 0 auto;
++      border: 1px solid #ccc;
++      border-right-color: #999;
++      border-bottom-color: #999;
++    }
++    h1 { font-size: 100%; color: #f00; line-height: 1.5em; }
++  </style>
++</head>
++
++<body>
++  <!-- This file lives in public/500.html -->
++  <div class="dialog">
++    <h1>We're sorry, but something went wrong.</h1>
++    <p>We've been notified about this issue and we'll take a look at it shortly.</p>
++  </div>
++</body>
++</html>
+diff --git a/public/favicon.ico b/public/favicon.ico
+new file mode 100644
+index 0000000..e69de29
+diff --git a/public/images/rails.png b/public/images/rails.png
+new file mode 100644
+index 0000000..d5edc04
+Binary files /dev/null and b/public/images/rails.png differ
+diff --git a/public/index.html b/public/index.html
+new file mode 100644
+index 0000000..75d5edd
+--- /dev/null
++++ b/public/index.html
+@@ -0,0 +1,239 @@
++<!DOCTYPE html>
++<html>
++  <head>
++    <title>Ruby on Rails: Welcome aboard</title>
++    <style type="text/css" media="screen">
++      body {
++        margin: 0;
++        margin-bottom: 25px;
++        padding: 0;
++        background-color: #f0f0f0;
++        font-family: "Lucida Grande", "Bitstream Vera Sans", "Verdana";
++        font-size: 13px;
++        color: #333;
++      }
++
++      h1 {
++        font-size: 28px;
++        color: #000;
++      }
++
++      a  {color: #03c}
++      a:hover {
++        background-color: #03c;
++        color: white;
++        text-decoration: none;
++      }
++
++
++      #page {
++        background-color: #f0f0f0;
++        width: 750px;
++        margin: 0;
++        margin-left: auto;
++        margin-right: auto;
++      }
++
++      #content {
++        float: left;
++        background-color: white;
++        border: 3px solid #aaa;
++        border-top: none;
++        padding: 25px;
++        width: 500px;
++      }
++
++      #sidebar {
++        float: right;
++        width: 175px;
++      }
++
++      #footer {
++        clear: both;
++      }
++
++
++      #header, #about, #getting-started {
++        padding-left: 75px;
++        padding-right: 30px;
++      }
++
++
++      #header {
++        background-image: url("images/rails.png");
++        background-repeat: no-repeat;
++        background-position: top left;
++        height: 64px;
++      }
++      #header h1, #header h2 {margin: 0}
++      #header h2 {
++        color: #888;
++        font-weight: normal;
++        font-size: 16px;
++      }
++
++
++      #about h3 {
++        margin: 0;
++        margin-bottom: 10px;
++        font-size: 14px;
++      }
++
++      #about-content {
++        background-color: #ffd;
++        border: 1px solid #fc0;
++        margin-left: -55px;
++        margin-right: -10px;
++      }
++      #about-content table {
++        margin-top: 10px;
++        margin-bottom: 10px;
++        font-size: 11px;
++        border-collapse: collapse;
++      }
++      #about-content td {
++        padding: 10px;
++        padding-top: 3px;
++        padding-bottom: 3px;
++      }
++      #about-content td.name  {color: #555}
++      #about-content td.value {color: #000}
++
++      #about-content ul {
++        padding: 0;
++        list-style-type: none;
++      }
++
++      #about-content.failure {
++        background-color: #fcc;
++        border: 1px solid #f00;
++      }
++      #about-content.failure p {
++        margin: 0;
++        padding: 10px;
++      }
++
++
++      #getting-started {
++        border-top: 1px solid #ccc;
++        margin-top: 25px;
++        padding-top: 15px;
++      }
++      #getting-started h1 {
++        margin: 0;
++        font-size: 20px;
++      }
++      #getting-started h2 {
++        margin: 0;
++        font-size: 14px;
++        font-weight: normal;
++        color: #333;
++        margin-bottom: 25px;
++      }
++      #getting-started ol {
++        margin-left: 0;
++        padding-left: 0;
++      }
++      #getting-started li {
++        font-size: 18px;
++        color: #888;
++        margin-bottom: 25px;
++      }
++      #getting-started li h2 {
++        margin: 0;
++        font-weight: normal;
++        font-size: 18px;
++        color: #333;
++      }
++      #getting-started li p {
++        color: #555;
++        font-size: 13px;
++      }
++
++
++      #sidebar ul {
++        margin-left: 0;
++        padding-left: 0;
++      }
++      #sidebar ul h3 {
++        margin-top: 25px;
++        font-size: 16px;
++        padding-bottom: 10px;
++        border-bottom: 1px solid #ccc;
++      }
++      #sidebar li {
++        list-style-type: none;
++      }
++      #sidebar ul.links li {
++        margin-bottom: 5px;
++      }
++
++    </style>
++    <script type="text/javascript">
++      function about() {
++        info = document.getElementById('about-content');
++        if (window.XMLHttpRequest)
++          { xhr = new XMLHttpRequest(); }
++        else
++          { xhr = new ActiveXObject("Microsoft.XMLHTTP"); }
++        xhr.open("GET","rails/info/properties",false);
++        xhr.send("");
++        info.innerHTML = xhr.responseText;
++        info.style.display = 'block'
++      }
++    </script>
++  </head>
++  <body>
++    <div id="page">
++      <div id="sidebar">
++        <ul id="sidebar-items">
++          <li>
++            <h3>Browse the documentation</h3>
++            <ul class="links">
++              <li><a href="http://api.rubyonrails.org/">Rails API</a></li>
++              <li><a href="http://stdlib.rubyonrails.org/">Ruby standard library</a></li>
++              <li><a href="http://corelib.rubyonrails.org/">Ruby core</a></li>
++              <li><a href="http://guides.rubyonrails.org/">Rails Guides</a></li>
++            </ul>
++          </li>
++        </ul>
++      </div>
++
++      <div id="content">
++        <div id="header">
++          <h1>Welcome aboard</h1>
++          <h2>You&rsquo;re riding Ruby on Rails!</h2>
++        </div>
++
++        <div id="about">
++          <h3><a href="rails/info/properties" onclick="about(); return false">About your application&rsquo;s environment</a></h3>
++          <div id="about-content" style="display: none"></div>
++        </div>
++
++        <div id="getting-started">
++          <h1>Getting started</h1>
++          <h2>Here&rsquo;s how to get rolling:</h2>
++
++          <ol>
++            <li>
++              <h2>Use <code>rails generate</code> to create your models and controllers</h2>
++              <p>To see all available options, run it without parameters.</p>
++            </li>
++
++            <li>
++              <h2>Set up a default route and remove or rename this file</h2>
++              <p>Routes are set up in config/routes.rb.</p>
++            </li>
++
++            <li>
++              <h2>Create your database</h2>
++              <p>Run <code>rake db:migrate</code> to create your database. If you're not using SQLite (the default), edit <code>config/database.yml</code> with your username and password.</p>
++            </li>
++          </ol>
++        </div>
++      </div>
++
++      <div id="footer">&nbsp;</div>
++    </div>
++  </body>
++</html>
+diff --git a/public/javascripts/application.js b/public/javascripts/application.js
+new file mode 100644
+index 0000000..fe45776
+--- /dev/null
++++ b/public/javascripts/application.js
+@@ -0,0 +1,2 @@
++// Place your application-specific JavaScript functions and classes here
++// This file is automatically included by javascript_include_tag :defaults
+diff --git a/public/javascripts/controls.js b/public/javascripts/controls.js
+new file mode 100644
+index 0000000..7392fb6
+--- /dev/null
++++ b/public/javascripts/controls.js
+@@ -0,0 +1,965 @@
++// script.aculo.us controls.js v1.8.3, Thu Oct 08 11:23:33 +0200 2009
++
++// Copyright (c) 2005-2009 Thomas Fuchs (http://script.aculo.us, http://mir.aculo.us)
++//           (c) 2005-2009 Ivan Krstic (http://blogs.law.harvard.edu/ivan)
++//           (c) 2005-2009 Jon Tirsen (http://www.tirsen.com)
++// Contributors:
++//  Richard Livsey
++//  Rahul Bhargava
++//  Rob Wills
++//
++// script.aculo.us is freely distributable under the terms of an MIT-style license.
++// For details, see the script.aculo.us web site: http://script.aculo.us/
++
++// Autocompleter.Base handles all the autocompletion functionality
++// that's independent of the data source for autocompletion. This
++// includes drawing the autocompletion menu, observing keyboard
++// and mouse events, and similar.
++//
++// Specific autocompleters need to provide, at the very least,
++// a getUpdatedChoices function that will be invoked every time
++// the text inside the monitored textbox changes. This method
++// should get the text for which to provide autocompletion by
++// invoking this.getToken(), NOT by directly accessing
++// this.element.value. This is to allow incremental tokenized
++// autocompletion. Specific auto-completion logic (AJAX, etc)
++// belongs in getUpdatedChoices.
++//
++// Tokenized incremental autocompletion is enabled automatically
++// when an autocompleter is instantiated with the 'tokens' option
++// in the options parameter, e.g.:
++// new Ajax.Autocompleter('id','upd', '/url/', { tokens: ',' });
++// will incrementally autocomplete with a comma as the token.
++// Additionally, ',' in the above example can be replaced with
++// a token array, e.g. { tokens: [',', '\n'] } which
++// enables autocompletion on multiple tokens. This is most
++// useful when one of the tokens is \n (a newline), as it
++// allows smart autocompletion after linebreaks.
++
++if(typeof Effect == 'undefined')
++  throw("controls.js requires including script.aculo.us' effects.js library");
++
++var Autocompleter = { };
++Autocompleter.Base = Class.create({
++  baseInitialize: function(element, update, options) {
++    element          = $(element);
++    this.element     = element;
++    this.update      = $(update);
++    this.hasFocus    = false;
++    this.changed     = false;
++    this.active      = false;
++    this.index       = 0;
++    this.entryCount  = 0;
++    this.oldElementValue = this.element.value;
++
++    if(this.setOptions)
++      this.setOptions(options);
++    else
++      this.options = options || { };
++
++    this.options.paramName    = this.options.paramName || this.element.name;
++    this.options.tokens       = this.options.tokens || [];
++    this.options.frequency    = this.options.frequency || 0.4;
++    this.options.minChars     = this.options.minChars || 1;
++    this.options.onShow       = this.options.onShow ||
++      function(element, update){
++        if(!update.style.position || update.style.position=='absolute') {
++          update.style.position = 'absolute';
++          Position.clone(element, update, {
++            setHeight: false,
++            offsetTop: element.offsetHeight
++          });
++        }
++        Effect.Appear(update,{duration:0.15});
++      };
++    this.options.onHide = this.options.onHide ||
++      function(element, update){ new Effect.Fade(update,{duration:0.15}) };
++
++    if(typeof(this.options.tokens) == 'string')
++      this.options.tokens = new Array(this.options.tokens);
++    // Force carriage returns as token delimiters anyway
++    if (!this.options.tokens.include('\n'))
++      this.options.tokens.push('\n');
++
++    this.observer = null;
++
++    this.element.setAttribute('autocomplete','off');
++
++    Element.hide(this.update);
++
++    Event.observe(this.element, 'blur', this.onBlur.bindAsEventListener(this));
++    Event.observe(this.element, 'keydown', this.onKeyPress.bindAsEventListener(this));
++  },
++
++  show: function() {
++    if(Element.getStyle(this.update, 'display')=='none') this.options.onShow(this.element, this.update);
++    if(!this.iefix &&
++      (Prototype.Browser.IE) &&
++      (Element.getStyle(this.update, 'position')=='absolute')) {
++      new Insertion.After(this.update,
++       '<iframe id="' + this.update.id + '_iefix" '+
++       'style="display:none;position:absolute;filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0);" ' +
++       'src="javascript:false;" frameborder="0" scrolling="no"></iframe>');
++      this.iefix = $(this.update.id+'_iefix');
++    }
++    if(this.iefix) setTimeout(this.fixIEOverlapping.bind(this), 50);
++  },
++
++  fixIEOverlapping: function() {
++    Position.clone(this.update, this.iefix, {setTop:(!this.update.style.height)});
++    this.iefix.style.zIndex = 1;
++    this.update.style.zIndex = 2;
++    Element.show(this.iefix);
++  },
++
++  hide: function() {
++    this.stopIndicator();
++    if(Element.getStyle(this.update, 'display')!='none') this.options.onHide(this.element, this.update);
++    if(this.iefix) Element.hide(this.iefix);
++  },
++
++  startIndicator: function() {
++    if(this.options.indicator) Element.show(this.options.indicator);
++  },
++
++  stopIndicator: function() {
++    if(this.options.indicator) Element.hide(this.options.indicator);
++  },
++
++  onKeyPress: function(event) {
++    if(this.active)
++      switch(event.keyCode) {
++       case Event.KEY_TAB:
++       case Event.KEY_RETURN:
++         this.selectEntry();
++         Event.stop(event);
++       case Event.KEY_ESC:
++         this.hide();
++         this.active = false;
++         Event.stop(event);
++         return;
++       case Event.KEY_LEFT:
++       case Event.KEY_RIGHT:
++         return;
++       case Event.KEY_UP:
++         this.markPrevious();
++         this.render();
++         Event.stop(event);
++         return;
++       case Event.KEY_DOWN:
++         this.markNext();
++         this.render();
++         Event.stop(event);
++         return;
++      }
++     else
++       if(event.keyCode==Event.KEY_TAB || event.keyCode==Event.KEY_RETURN ||
++         (Prototype.Browser.WebKit > 0 && event.keyCode == 0)) return;
++
++    this.changed = true;
++    this.hasFocus = true;
++
++    if(this.observer) clearTimeout(this.observer);
++      this.observer =
++        setTimeout(this.onObserverEvent.bind(this), this.options.frequency*1000);
++  },
++
++  activate: function() {
++    this.changed = false;
++    this.hasFocus = true;
++    this.getUpdatedChoices();
++  },
++
++  onHover: function(event) {
++    var element = Event.findElement(event, 'LI');
++    if(this.index != element.autocompleteIndex)
++    {
++        this.index = element.autocompleteIndex;
++        this.render();
++    }
++    Event.stop(event);
++  },
++
++  onClick: function(event) {
++    var element = Event.findElement(event, 'LI');
++    this.index = element.autocompleteIndex;
++    this.selectEntry();
++    this.hide();
++  },
++
++  onBlur: function(event) {
++    // needed to make click events working
++    setTimeout(this.hide.bind(this), 250);
++    this.hasFocus = false;
++    this.active = false;
++  },
++
++  render: function() {
++    if(this.entryCount > 0) {
++      for (var i = 0; i < this.entryCount; i++)
++        this.index==i ?
++          Element.addClassName(this.getEntry(i),"selected") :
++          Element.removeClassName(this.getEntry(i),"selected");
++      if(this.hasFocus) {
++        this.show();
++        this.active = true;
++      }
++    } else {
++      this.active = false;
++      this.hide();
++    }
++  },
++
++  markPrevious: function() {
++    if(this.index > 0) this.index--;
++      else this.index = this.entryCount-1;
++    this.getEntry(this.index).scrollIntoView(true);
++  },
++
++  markNext: function() {
++    if(this.index < this.entryCount-1) this.index++;
++      else this.index = 0;
++    this.getEntry(this.index).scrollIntoView(false);
++  },
++
++  getEntry: function(index) {
++    return this.update.firstChild.childNodes[index];
++  },
++
++  getCurrentEntry: function() {
++    return this.getEntry(this.index);
++  },
++
++  selectEntry: function() {
++    this.active = false;
++    this.updateElement(this.getCurrentEntry());
++  },
++
++  updateElement: function(selectedElement) {
++    if (this.options.updateElement) {
++      this.options.updateElement(selectedElement);
++      return;
++    }
++    var value = '';
++    if (this.options.select) {
++      var nodes = $(selectedElement).select('.' + this.options.select) || [];
++      if(nodes.length>0) value = Element.collectTextNodes(nodes[0], this.options.select);
++    } else
++      value = Element.collectTextNodesIgnoreClass(selectedElement, 'informal');
++
++    var bounds = this.getTokenBounds();
++    if (bounds[0] != -1) {
++      var newValue = this.element.value.substr(0, bounds[0]);
++      var whitespace = this.element.value.substr(bounds[0]).match(/^\s+/);
++      if (whitespace)
++        newValue += whitespace[0];
++      this.element.value = newValue + value + this.element.value.substr(bounds[1]);
++    } else {
++      this.element.value = value;
++    }
++    this.oldElementValue = this.element.value;
++    this.element.focus();
++
++    if (this.options.afterUpdateElement)
++      this.options.afterUpdateElement(this.element, selectedElement);
++  },
++
++  updateChoices: function(choices) {
++    if(!this.changed && this.hasFocus) {
++      this.update.innerHTML = choices;
++      Element.cleanWhitespace(this.update);
++      Element.cleanWhitespace(this.update.down());
++
++      if(this.update.firstChild && this.update.down().childNodes) {
++        this.entryCount =
++          this.update.down().childNodes.length;
++        for (var i = 0; i < this.entryCount; i++) {
++          var entry = this.getEntry(i);
++          entry.autocompleteIndex = i;
++          this.addObservers(entry);
++        }
++      } else {
++        this.entryCount = 0;
++      }
++
++      this.stopIndicator();
++      this.index = 0;
++
++      if(this.entryCount==1 && this.options.autoSelect) {
++        this.selectEntry();
++        this.hide();
++      } else {
++        this.render();
++      }
++    }
++  },
++
++  addObservers: function(element) {
++    Event.observe(element, "mouseover", this.onHover.bindAsEventListener(this));
++    Event.observe(element, "click", this.onClick.bindAsEventListener(this));
++  },
++
++  onObserverEvent: function() {
++    this.changed = false;
++    this.tokenBounds = null;
++    if(this.getToken().length>=this.options.minChars) {
++      this.getUpdatedChoices();
++    } else {
++      this.active = false;
++      this.hide();
++    }
++    this.oldElementValue = this.element.value;
++  },
++
++  getToken: function() {
++    var bounds = this.getTokenBounds();
++    return this.element.value.substring(bounds[0], bounds[1]).strip();
++  },
++
++  getTokenBounds: function() {
++    if (null != this.tokenBounds) return this.tokenBounds;
++    var value = this.element.value;
++    if (value.strip().empty()) return [-1, 0];
++    var diff = arguments.callee.getFirstDifferencePos(value, this.oldElementValue);
++    var offset = (diff == this.oldElementValue.length ? 1 : 0);
++    var prevTokenPos = -1, nextTokenPos = value.length;
++    var tp;
++    for (var index = 0, l = this.options.tokens.length; index < l; ++index) {
++      tp = value.lastIndexOf(this.options.tokens[index], diff + offset - 1);
++      if (tp > prevTokenPos) prevTokenPos = tp;
++      tp = value.indexOf(this.options.tokens[index], diff + offset);
++      if (-1 != tp && tp < nextTokenPos) nextTokenPos = tp;
++    }
++    return (this.tokenBounds = [prevTokenPos + 1, nextTokenPos]);
++  }
++});
++
++Autocompleter.Base.prototype.getTokenBounds.getFirstDifferencePos = function(newS, oldS) {
++  var boundary = Math.min(newS.length, oldS.length);
++  for (var index = 0; index < boundary; ++index)
++    if (newS[index] != oldS[index])
++      return index;
++  return boundary;
++};
++
++Ajax.Autocompleter = Class.create(Autocompleter.Base, {
++  initialize: function(element, update, url, options) {
++    this.baseInitialize(element, update, options);
++    this.options.asynchronous  = true;
++    this.options.onComplete    = this.onComplete.bind(this);
++    this.options.defaultParams = this.options.parameters || null;
++    this.url                   = url;
++  },
++
++  getUpdatedChoices: function() {
++    this.startIndicator();
++
++    var entry = encodeURIComponent(this.options.paramName) + '=' +
++      encodeURIComponent(this.getToken());
++
++    this.options.parameters = this.options.callback ?
++      this.options.callback(this.element, entry) : entry;
++
++    if(this.options.defaultParams)
++      this.options.parameters += '&' + this.options.defaultParams;
++
++    new Ajax.Request(this.url, this.options);
++  },
++
++  onComplete: function(request) {
++    this.updateChoices(request.responseText);
++  }
++});
++
++// The local array autocompleter. Used when you'd prefer to
++// inject an array of autocompletion options into the page, rather
++// than sending out Ajax queries, which can be quite slow sometimes.
++//
++// The constructor takes four parameters. The first two are, as usual,
++// the id of the monitored textbox, and id of the autocompletion menu.
++// The third is the array you want to autocomplete from, and the fourth
++// is the options block.
++//
++// Extra local autocompletion options:
++// - choices - How many autocompletion choices to offer
++//
++// - partialSearch - If false, the autocompleter will match entered
++//                    text only at the beginning of strings in the
++//                    autocomplete array. Defaults to true, which will
++//                    match text at the beginning of any *word* in the
++//                    strings in the autocomplete array. If you want to
++//                    search anywhere in the string, additionally set
++//                    the option fullSearch to true (default: off).
++//
++// - fullSsearch - Search anywhere in autocomplete array strings.
++//
++// - partialChars - How many characters to enter before triggering
++//                   a partial match (unlike minChars, which defines
++//                   how many characters are required to do any match
++//                   at all). Defaults to 2.
++//
++// - ignoreCase - Whether to ignore case when autocompleting.
++//                 Defaults to true.
++//
++// It's possible to pass in a custom function as the 'selector'
++// option, if you prefer to write your own autocompletion logic.
++// In that case, the other options above will not apply unless
++// you support them.
++
++Autocompleter.Local = Class.create(Autocompleter.Base, {
++  initialize: function(element, update, array, options) {
++    this.baseInitialize(element, update, options);
++    this.options.array = array;
++  },
++
++  getUpdatedChoices: function() {
++    this.updateChoices(this.options.selector(this));
++  },
++
++  setOptions: function(options) {
++    this.options = Object.extend({
++      choices: 10,
++      partialSearch: true,
++      partialChars: 2,
++      ignoreCase: true,
++      fullSearch: false,
++      selector: function(instance) {
++        var ret       = []; // Beginning matches
++        var partial   = []; // Inside matches
++        var entry     = instance.getToken();
++        var count     = 0;
++
++        for (var i = 0; i < instance.options.array.length &&
++          ret.length < instance.options.choices ; i++) {
++
++          var elem = instance.options.array[i];
++          var foundPos = instance.options.ignoreCase ?
++            elem.toLowerCase().indexOf(entry.toLowerCase()) :
++            elem.indexOf(entry);
++
++          while (foundPos != -1) {
++            if (foundPos == 0 && elem.length != entry.length) {
++              ret.push("<li><strong>" + elem.substr(0, entry.length) + "</strong>" +
++                elem.substr(entry.length) + "</li>");
++              break;
++            } else if (entry.length >= instance.options.partialChars &&
++              instance.options.partialSearch && foundPos != -1) {
++              if (instance.options.fullSearch || /\s/.test(elem.substr(foundPos-1,1))) {
++                partial.push("<li>" + elem.substr(0, foundPos) + "<strong>" +
++                  elem.substr(foundPos, entry.length) + "</strong>" + elem.substr(
++                  foundPos + entry.length) + "</li>");
++                break;
++              }
++            }
++
++            foundPos = instance.options.ignoreCase ?
++              elem.toLowerCase().indexOf(entry.toLowerCase(), foundPos + 1) :
++              elem.indexOf(entry, foundPos + 1);
++
++          }
++        }
++        if (partial.length)
++          ret = ret.concat(partial.slice(0, instance.options.choices - ret.length));
++        return "<ul>" + ret.join('') + "</ul>";
++      }
++    }, options || { });
++  }
++});
++
++// AJAX in-place editor and collection editor
++// Full rewrite by Christophe Porteneuve <tdd@tddsworld.com> (April 2007).
++
++// Use this if you notice weird scrolling problems on some browsers,
++// the DOM might be a bit confused when this gets called so do this
++// waits 1 ms (with setTimeout) until it does the activation
++Field.scrollFreeActivate = function(field) {
++  setTimeout(function() {
++    Field.activate(field);
++  }, 1);
++};
++
++Ajax.InPlaceEditor = Class.create({
++  initialize: function(element, url, options) {
++    this.url = url;
++    this.element = element = $(element);
++    this.prepareOptions();
++    this._controls = { };
++    arguments.callee.dealWithDeprecatedOptions(options); // DEPRECATION LAYER!!!
++    Object.extend(this.options, options || { });
++    if (!this.options.formId && this.element.id) {
++      this.options.formId = this.element.id + '-inplaceeditor';
++      if ($(this.options.formId))
++        this.options.formId = '';
++    }
++    if (this.options.externalControl)
++      this.options.externalControl = $(this.options.externalControl);
++    if (!this.options.externalControl)
++      this.options.externalControlOnly = false;
++    this._originalBackground = this.element.getStyle('background-color') || 'transparent';
++    this.element.title = this.options.clickToEditText;
++    this._boundCancelHandler = this.handleFormCancellation.bind(this);
++    this._boundComplete = (this.options.onComplete || Prototype.emptyFunction).bind(this);
++    this._boundFailureHandler = this.handleAJAXFailure.bind(this);
++    this._boundSubmitHandler = this.handleFormSubmission.bind(this);
++    this._boundWrapperHandler = this.wrapUp.bind(this);
++    this.registerListeners();
++  },
++  checkForEscapeOrReturn: function(e) {
++    if (!this._editing || e.ctrlKey || e.altKey || e.shiftKey) return;
++    if (Event.KEY_ESC == e.keyCode)
++      this.handleFormCancellation(e);
++    else if (Event.KEY_RETURN == e.keyCode)
++      this.handleFormSubmission(e);
++  },
++  createControl: function(mode, handler, extraClasses) {
++    var control = this.options[mode + 'Control'];
++    var text = this.options[mode + 'Text'];
++    if ('button' == control) {
++      var btn = document.createElement('input');
++      btn.type = 'submit';
++      btn.value = text;
++      btn.className = 'editor_' + mode + '_button';
++      if ('cancel' == mode)
++        btn.onclick = this._boundCancelHandler;
++      this._form.appendChild(btn);
++      this._controls[mode] = btn;
++    } else if ('link' == control) {
++      var link = document.createElement('a');
++      link.href = '#';
++      link.appendChild(document.createTextNode(text));
++      link.onclick = 'cancel' == mode ? this._boundCancelHandler : this._boundSubmitHandler;
++      link.className = 'editor_' + mode + '_link';
++      if (extraClasses)
++        link.className += ' ' + extraClasses;
++      this._form.appendChild(link);
++      this._controls[mode] = link;
++    }
++  },
++  createEditField: function() {
++    var text = (this.options.loadTextURL ? this.options.loadingText : this.getText());
++    var fld;
++    if (1 >= this.options.rows && !/\r|\n/.test(this.getText())) {
++      fld = document.createElement('input');
++      fld.type = 'text';
++      var size = this.options.size || this.options.cols || 0;
++      if (0 < size) fld.size = size;
++    } else {
++      fld = document.createElement('textarea');
++      fld.rows = (1 >= this.options.rows ? this.options.autoRows : this.options.rows);
++      fld.cols = this.options.cols || 40;
++    }
++    fld.name = this.options.paramName;
++    fld.value = text; // No HTML breaks conversion anymore
++    fld.className = 'editor_field';
++    if (this.options.submitOnBlur)
++      fld.onblur = this._boundSubmitHandler;
++    this._controls.editor = fld;
++    if (this.options.loadTextURL)
++      this.loadExternalText();
++    this._form.appendChild(this._controls.editor);
++  },
++  createForm: function() {
++    var ipe = this;
++    function addText(mode, condition) {
++      var text = ipe.options['text' + mode + 'Controls'];
++      if (!text || condition === false) return;
++      ipe._form.appendChild(document.createTextNode(text));
++    };
++    this._form = $(document.createElement('form'));
++    this._form.id = this.options.formId;
++    this._form.addClassName(this.options.formClassName);
++    this._form.onsubmit = this._boundSubmitHandler;
++    this.createEditField();
++    if ('textarea' == this._controls.editor.tagName.toLowerCase())
++      this._form.appendChild(document.createElement('br'));
++    if (this.options.onFormCustomization)
++      this.options.onFormCustomization(this, this._form);
++    addText('Before', this.options.okControl || this.options.cancelControl);
++    this.createControl('ok', this._boundSubmitHandler);
++    addText('Between', this.options.okControl && this.options.cancelControl);
++    this.createControl('cancel', this._boundCancelHandler, 'editor_cancel');
++    addText('After', this.options.okControl || this.options.cancelControl);
++  },
++  destroy: function() {
++    if (this._oldInnerHTML)
++      this.element.innerHTML = this._oldInnerHTML;
++    this.leaveEditMode();
++    this.unregisterListeners();
++  },
++  enterEditMode: function(e) {
++    if (this._saving || this._editing) return;
++    this._editing = true;
++    this.triggerCallback('onEnterEditMode');
++    if (this.options.externalControl)
++      this.options.externalControl.hide();
++    this.element.hide();
++    this.createForm();
++    this.element.parentNode.insertBefore(this._form, this.element);
++    if (!this.options.loadTextURL)
++      this.postProcessEditField();
++    if (e) Event.stop(e);
++  },
++  enterHover: function(e) {
++    if (this.options.hoverClassName)
++      this.element.addClassName(this.options.hoverClassName);
++    if (this._saving) return;
++    this.triggerCallback('onEnterHover');
++  },
++  getText: function() {
++    return this.element.innerHTML.unescapeHTML();
++  },
++  handleAJAXFailure: function(transport) {
++    this.triggerCallback('onFailure', transport);
++    if (this._oldInnerHTML) {
++      this.element.innerHTML = this._oldInnerHTML;
++      this._oldInnerHTML = null;
++    }
++  },
++  handleFormCancellation: function(e) {
++    this.wrapUp();
++    if (e) Event.stop(e);
++  },
++  handleFormSubmission: function(e) {
++    var form = this._form;
++    var value = $F(this._controls.editor);
++    this.prepareSubmission();
++    var params = this.options.callback(form, value) || '';
++    if (Object.isString(params))
++      params = params.toQueryParams();
++    params.editorId = this.element.id;
++    if (this.options.htmlResponse) {
++      var options = Object.extend({ evalScripts: true }, this.options.ajaxOptions);
++      Object.extend(options, {
++        parameters: params,
++        onComplete: this._boundWrapperHandler,
++        onFailure: this._boundFailureHandler
++      });
++      new Ajax.Updater({ success: this.element }, this.url, options);
++    } else {
++      var options = Object.extend({ method: 'get' }, this.options.ajaxOptions);
++      Object.extend(options, {
++        parameters: params,
++        onComplete: this._boundWrapperHandler,
++        onFailure: this._boundFailureHandler
++      });
++      new Ajax.Request(this.url, options);
++    }
++    if (e) Event.stop(e);
++  },
++  leaveEditMode: function() {
++    this.element.removeClassName(this.options.savingClassName);
++    this.removeForm();
++    this.leaveHover();
++    this.element.style.backgroundColor = this._originalBackground;
++    this.element.show();
++    if (this.options.externalControl)
++      this.options.externalControl.show();
++    this._saving = false;
++    this._editing = false;
++    this._oldInnerHTML = null;
++    this.triggerCallback('onLeaveEditMode');
++  },
++  leaveHover: function(e) {
++    if (this.options.hoverClassName)
++      this.element.removeClassName(this.options.hoverClassName);
++    if (this._saving) return;
++    this.triggerCallback('onLeaveHover');
++  },
++  loadExternalText: function() {
++    this._form.addClassName(this.options.loadingClassName);
++    this._controls.editor.disabled = true;
++    var options = Object.extend({ method: 'get' }, this.options.ajaxOptions);
++    Object.extend(options, {
++      parameters: 'editorId=' + encodeURIComponent(this.element.id),
++      onComplete: Prototype.emptyFunction,
++      onSuccess: function(transport) {
++        this._form.removeClassName(this.options.loadingClassName);
++        var text = transport.responseText;
++        if (this.options.stripLoadedTextTags)
++          text = text.stripTags();
++        this._controls.editor.value = text;
++        this._controls.editor.disabled = false;
++        this.postProcessEditField();
++      }.bind(this),
++      onFailure: this._boundFailureHandler
++    });
++    new Ajax.Request(this.options.loadTextURL, options);
++  },
++  postProcessEditField: function() {
++    var fpc = this.options.fieldPostCreation;
++    if (fpc)
++      $(this._controls.editor)['focus' == fpc ? 'focus' : 'activate']();
++  },
++  prepareOptions: function() {
++    this.options = Object.clone(Ajax.InPlaceEditor.DefaultOptions);
++    Object.extend(this.options, Ajax.InPlaceEditor.DefaultCallbacks);
++    [this._extraDefaultOptions].flatten().compact().each(function(defs) {
++      Object.extend(this.options, defs);
++    }.bind(this));
++  },
++  prepareSubmission: function() {
++    this._saving = true;
++    this.removeForm();
++    this.leaveHover();
++    this.showSaving();
++  },
++  registerListeners: function() {
++    this._listeners = { };
++    var listener;
++    $H(Ajax.InPlaceEditor.Listeners).each(function(pair) {
++      listener = this[pair.value].bind(this);
++      this._listeners[pair.key] = listener;
++      if (!this.options.externalControlOnly)
++        this.element.observe(pair.key, listener);
++      if (this.options.externalControl)
++        this.options.externalControl.observe(pair.key, listener);
++    }.bind(this));
++  },
++  removeForm: function() {
++    if (!this._form) return;
++    this._form.remove();
++    this._form = null;
++    this._controls = { };
++  },
++  showSaving: function() {
++    this._oldInnerHTML = this.element.innerHTML;
++    this.element.innerHTML = this.options.savingText;
++    this.element.addClassName(this.options.savingClassName);
++    this.element.style.backgroundColor = this._originalBackground;
++    this.element.show();
++  },
++  triggerCallback: function(cbName, arg) {
++    if ('function' == typeof this.options[cbName]) {
++      this.options[cbName](this, arg);
++    }
++  },
++  unregisterListeners: function() {
++    $H(this._listeners).each(function(pair) {
++      if (!this.options.externalControlOnly)
++        this.element.stopObserving(pair.key, pair.value);
++      if (this.options.externalControl)
++        this.options.externalControl.stopObserving(pair.key, pair.value);
++    }.bind(this));
++  },
++  wrapUp: function(transport) {
++    this.leaveEditMode();
++    // Can't use triggerCallback due to backward compatibility: requires
++    // binding + direct element
++    this._boundComplete(transport, this.element);
++  }
++});
++
++Object.extend(Ajax.InPlaceEditor.prototype, {
++  dispose: Ajax.InPlaceEditor.prototype.destroy
++});
++
++Ajax.InPlaceCollectionEditor = Class.create(Ajax.InPlaceEditor, {
++  initialize: function($super, element, url, options) {
++    this._extraDefaultOptions = Ajax.InPlaceCollectionEditor.DefaultOptions;
++    $super(element, url, options);
++  },
++
++  createEditField: function() {
++    var list = document.createElement('select');
++    list.name = this.options.paramName;
++    list.size = 1;
++    this._controls.editor = list;
++    this._collection = this.options.collection || [];
++    if (this.options.loadCollectionURL)
++      this.loadCollection();
++    else
++      this.checkForExternalText();
++    this._form.appendChild(this._controls.editor);
++  },
++
++  loadCollection: function() {
++    this._form.addClassName(this.options.loadingClassName);
++    this.showLoadingText(this.options.loadingCollectionText);
++    var options = Object.extend({ method: 'get' }, this.options.ajaxOptions);
++    Object.extend(options, {
++      parameters: 'editorId=' + encodeURIComponent(this.element.id),
++      onComplete: Prototype.emptyFunction,
++      onSuccess: function(transport) {
++        var js = transport.responseText.strip();
++        if (!/^\[.*\]$/.test(js)) // TODO: improve sanity check
++          throw('Server returned an invalid collection representation.');
++        this._collection = eval(js);
++        this.checkForExternalText();
++      }.bind(this),
++      onFailure: this.onFailure
++    });
++    new Ajax.Request(this.options.loadCollectionURL, options);
++  },
++
++  showLoadingText: function(text) {
++    this._controls.editor.disabled = true;
++    var tempOption = this._controls.editor.firstChild;
++    if (!tempOption) {
++      tempOption = document.createElement('option');
++      tempOption.value = '';
++      this._controls.editor.appendChild(tempOption);
++      tempOption.selected = true;
++    }
++    tempOption.update((text || '').stripScripts().stripTags());
++  },
++
++  checkForExternalText: function() {
++    this._text = this.getText();
++    if (this.options.loadTextURL)
++      this.loadExternalText();
++    else
++      this.buildOptionList();
++  },
++
++  loadExternalText: function() {
++    this.showLoadingText(this.options.loadingText);
++    var options = Object.extend({ method: 'get' }, this.options.ajaxOptions);
++    Object.extend(options, {
++      parameters: 'editorId=' + encodeURIComponent(this.element.id),
++      onComplete: Prototype.emptyFunction,
++      onSuccess: function(transport) {
++        this._text = transport.responseText.strip();
++        this.buildOptionList();
++      }.bind(this),
++      onFailure: this.onFailure
++    });
++    new Ajax.Request(this.options.loadTextURL, options);
++  },
++
++  buildOptionList: function() {
++    this._form.removeClassName(this.options.loadingClassName);
++    this._collection = this._collection.map(function(entry) {
++      return 2 === entry.length ? entry : [entry, entry].flatten();
++    });
++    var marker = ('value' in this.options) ? this.options.value : this._text;
++    var textFound = this._collection.any(function(entry) {
++      return entry[0] == marker;
++    }.bind(this));
++    this._controls.editor.update('');
++    var option;
++    this._collection.each(function(entry, index) {
++      option = document.createElement('option');
++      option.value = entry[0];
++      option.selected = textFound ? entry[0] == marker : 0 == index;
++      option.appendChild(document.createTextNode(entry[1]));
++      this._controls.editor.appendChild(option);
++    }.bind(this));
++    this._controls.editor.disabled = false;
++    Field.scrollFreeActivate(this._controls.editor);
++  }
++});
++
++//**** DEPRECATION LAYER FOR InPlace[Collection]Editor! ****
++//**** This only  exists for a while,  in order to  let ****
++//**** users adapt to  the new API.  Read up on the new ****
++//**** API and convert your code to it ASAP!            ****
++
++Ajax.InPlaceEditor.prototype.initialize.dealWithDeprecatedOptions = function(options) {
++  if (!options) return;
++  function fallback(name, expr) {
++    if (name in options || expr === undefined) return;
++    options[name] = expr;
++  };
++  fallback('cancelControl', (options.cancelLink ? 'link' : (options.cancelButton ? 'button' :
++    options.cancelLink == options.cancelButton == false ? false : undefined)));
++  fallback('okControl', (options.okLink ? 'link' : (options.okButton ? 'button' :
++    options.okLink == options.okButton == false ? false : undefined)));
++  fallback('highlightColor', options.highlightcolor);
++  fallback('highlightEndColor', options.highlightendcolor);
++};
++
++Object.extend(Ajax.InPlaceEditor, {
++  DefaultOptions: {
++    ajaxOptions: { },
++    autoRows: 3,                                // Use when multi-line w/ rows == 1
++    cancelControl: 'link',                      // 'link'|'button'|false
++    cancelText: 'cancel',
++    clickToEditText: 'Click to edit',
++    externalControl: null,                      // id|elt
++    externalControlOnly: false,
++    fieldPostCreation: 'activate',              // 'activate'|'focus'|false
++    formClassName: 'inplaceeditor-form',
++    formId: null,                               // id|elt
++    highlightColor: '#ffff99',
++    highlightEndColor: '#ffffff',
++    hoverClassName: '',
++    htmlResponse: true,
++    loadingClassName: 'inplaceeditor-loading',
++    loadingText: 'Loading...',
++    okControl: 'button',                        // 'link'|'button'|false
++    okText: 'ok',
++    paramName: 'value',
++    rows: 1,                                    // If 1 and multi-line, uses autoRows
++    savingClassName: 'inplaceeditor-saving',
++    savingText: 'Saving...',
++    size: 0,
++    stripLoadedTextTags: false,
++    submitOnBlur: false,
++    textAfterControls: '',
++    textBeforeControls: '',
++    textBetweenControls: ''
++  },
++  DefaultCallbacks: {
++    callback: function(form) {
++      return Form.serialize(form);
++    },
++    onComplete: function(transport, element) {
++      // For backward compatibility, this one is bound to the IPE, and passes
++      // the element directly.  It was too often customized, so we don't break it.
++      new Effect.Highlight(element, {
++        startcolor: this.options.highlightColor, keepBackgroundImage: true });
++    },
++    onEnterEditMode: null,
++    onEnterHover: function(ipe) {
++      ipe.element.style.backgroundColor = ipe.options.highlightColor;
++      if (ipe._effect)
++        ipe._effect.cancel();
++    },
++    onFailure: function(transport, ipe) {
++      alert('Error communication with the server: ' + transport.responseText.stripTags());
++    },
++    onFormCustomization: null, // Takes the IPE and its generated form, after editor, before controls.
++    onLeaveEditMode: null,
++    onLeaveHover: function(ipe) {
++      ipe._effect = new Effect.Highlight(ipe.element, {
++        startcolor: ipe.options.highlightColor, endcolor: ipe.options.highlightEndColor,
++        restorecolor: ipe._originalBackground, keepBackgroundImage: true
++      });
++    }
++  },
++  Listeners: {
++    click: 'enterEditMode',
++    keydown: 'checkForEscapeOrReturn',
++    mouseover: 'enterHover',
++    mouseout: 'leaveHover'
++  }
++});
++
++Ajax.InPlaceCollectionEditor.DefaultOptions = {
++  loadingCollectionText: 'Loading options...'
++};
++
++// Delayed observer, like Form.Element.Observer,
++// but waits for delay after last key input
++// Ideal for live-search fields
++
++Form.Element.DelayedObserver = Class.create({
++  initialize: function(element, delay, callback) {
++    this.delay     = delay || 0.5;
++    this.element   = $(element);
++    this.callback  = callback;
++    this.timer     = null;
++    this.lastValue = $F(this.element);
++    Event.observe(this.element,'keyup',this.delayedListener.bindAsEventListener(this));
++  },
++  delayedListener: function(event) {
++    if(this.lastValue == $F(this.element)) return;
++    if(this.timer) clearTimeout(this.timer);
++    this.timer = setTimeout(this.onTimerEvent.bind(this), this.delay * 1000);
++    this.lastValue = $F(this.element);
++  },
++  onTimerEvent: function() {
++    this.timer = null;
++    this.callback(this.element, $F(this.element));
++  }
++});
+\ No newline at end of file
+diff --git a/public/javascripts/dragdrop.js b/public/javascripts/dragdrop.js
+new file mode 100644
+index 0000000..15c6dbc
+--- /dev/null
++++ b/public/javascripts/dragdrop.js
+@@ -0,0 +1,974 @@
++// script.aculo.us dragdrop.js v1.8.3, Thu Oct 08 11:23:33 +0200 2009
++
++// Copyright (c) 2005-2009 Thomas Fuchs (http://script.aculo.us, http://mir.aculo.us)
++//
++// script.aculo.us is freely distributable under the terms of an MIT-style license.
++// For details, see the script.aculo.us web site: http://script.aculo.us/
++
++if(Object.isUndefined(Effect))
++  throw("dragdrop.js requires including script.aculo.us' effects.js library");
++
++var Droppables = {
++  drops: [],
++
++  remove: function(element) {
++    this.drops = this.drops.reject(function(d) { return d.element==$(element) });
++  },
++
++  add: function(element) {
++    element = $(element);
++    var options = Object.extend({
++      greedy:     true,
++      hoverclass: null,
++      tree:       false
++    }, arguments[1] || { });
++
++    // cache containers
++    if(options.containment) {
++      options._containers = [];
++      var containment = options.containment;
++      if(Object.isArray(containment)) {
++        containment.each( function(c) { options._containers.push($(c)) });
++      } else {
++        options._containers.push($(containment));
++      }
++    }
++
++    if(options.accept) options.accept = [options.accept].flatten();
++
++    Element.makePositioned(element); // fix IE
++    options.element = element;
++
++    this.drops.push(options);
++  },
++
++  findDeepestChild: function(drops) {
++    deepest = drops[0];
++
++    for (i = 1; i < drops.length; ++i)
++      if (Element.isParent(drops[i].element, deepest.element))
++        deepest = drops[i];
++
++    return deepest;
++  },
++
++  isContained: function(element, drop) {
++    var containmentNode;
++    if(drop.tree) {
++      containmentNode = element.treeNode;
++    } else {
++      containmentNode = element.parentNode;
++    }
++    return drop._containers.detect(function(c) { return containmentNode == c });
++  },
++
++  isAffected: function(point, element, drop) {
++    return (
++      (drop.element!=element) &&
++      ((!drop._containers) ||
++        this.isContained(element, drop)) &&
++      ((!drop.accept) ||
++        (Element.classNames(element).detect(
++          function(v) { return drop.accept.include(v) } ) )) &&
++      Position.within(drop.element, point[0], point[1]) );
++  },
++
++  deactivate: function(drop) {
++    if(drop.hovercl
